@@ -6,7 +6,7 @@
 <title>💜</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet" />
 <style>
-  /* ───── LIGHT THEME (default vars) ───── */
+  /* ───── LIGHT THEME ───── */
   :root {
     --bg: #e8e0f0;
     --shadow-light: #ffffff;
@@ -20,15 +20,16 @@
     --card-bg: #ede6f5;
     --green: #7ec8a0;
     --pink: #e8a0c8;
-    --toggle-icon: '☀️';
     --star-color: #b49fd8;
+    --sky-top: #d4c4f0;
+    --sky-bot: #e8e0f0;
   }
 
-  /* ───── DARK THEME ───── */
+  /* ───── DARK THEME (default) ───── */
   [data-theme="dark"] {
     --bg: #1a1525;
-    --shadow-light: #261e38;
-    --shadow-dark: #0f0b18;
+    --shadow-light: #2a2040;
+    --shadow-dark: #0d0a14;
     --accent: #c4a0f0;
     --accent-soft: #a07ed0;
     --accent-glow: #3a2860;
@@ -38,44 +39,16 @@
     --card-bg: #221a34;
     --green: #7ec8a0;
     --pink: #e8a0c8;
-    --toggle-icon: '🌙';
     --star-color: #c4a0f0;
+    --sky-top: #2a1a4a;
+    --sky-bot: #1a1525;
   }
 
-  /* ───── THEME TOGGLE ───── */
-  .theme-toggle {
-    position: fixed;
-    top: 1.2rem;
-    right: 1.2rem;
-    z-index: 900;
-    width: 48px; height: 48px;
-    border: none;
-    border-radius: 50%;
-    background: var(--bg);
-    box-shadow:
-      5px 5px 12px var(--shadow-dark),
-      -5px -5px 12px var(--shadow-light);
-    cursor: pointer;
-    font-size: 1.2rem;
-    display: flex; align-items: center; justify-content: center;
-    transition: box-shadow 0.2s, background 0.4s;
-  }
-  .theme-toggle:active {
-    box-shadow:
-      inset 3px 3px 8px var(--shadow-dark),
-      inset -3px -3px 8px var(--shadow-light);
-  }
-
-  /* smooth theme transition */
-  *, *::before, *::after {
-    transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
-  }
-
-  /* base reset + smooth theme transition */
+  /* ───── RESET + THEME TRANSITION ───── */
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0; padding: 0;
-    transition: background-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
   }
 
   body {
@@ -84,6 +57,29 @@
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  /* ───── THEME TOGGLE ───── */
+  .theme-toggle {
+    position: fixed;
+    top: 1.1rem;
+    right: 1.1rem;
+    z-index: 999;
+    width: 46px; height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow:
+      5px 5px 12px var(--shadow-dark),
+      -5px -5px 12px var(--shadow-light);
+    cursor: pointer;
+    font-size: 1.15rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .theme-toggle:active {
+    box-shadow:
+      inset 3px 3px 8px var(--shadow-dark),
+      inset -3px -3px 8px var(--shadow-light);
   }
 
   /* ───── HERO ───── */
@@ -98,24 +94,17 @@
     position: relative;
     overflow: hidden;
   }
-
-  .hero-stars {
-    position: absolute; inset: 0; pointer-events: none;
-    overflow: hidden;
-  }
+  .hero-stars { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
   .star {
     position: absolute;
-    width: 3px; height: 3px;
-    background: var(--accent-soft);
     border-radius: 50%;
     opacity: 0;
     animation: twinkle var(--d, 3s) ease-in-out infinite var(--delay, 0s);
   }
   @keyframes twinkle {
     0%,100% { opacity: 0; transform: scale(1); }
-    50% { opacity: 0.7; transform: scale(1.5); }
+    50% { opacity: 0.8; transform: scale(1.5); }
   }
-
   .moon {
     width: 80px; height: 80px;
     border-radius: 50%;
@@ -128,7 +117,6 @@
     animation: float 4s ease-in-out infinite;
   }
   @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 6vw, 3.2rem);
@@ -137,10 +125,10 @@
     margin-bottom: 0.5rem;
   }
   .hero h1 span { color: var(--accent); font-style: italic; }
-  .hero p {
+  .hero > p {
     font-size: 1rem;
     color: var(--text-soft);
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     max-width: 340px;
     line-height: 1.7;
   }
@@ -162,24 +150,18 @@
     font-weight: 700;
     color: var(--accent);
     cursor: pointer;
-    transition: all 0.15s ease;
     text-decoration: none;
     letter-spacing: 0.02em;
   }
-  .neu-btn:active, .neu-btn.pressed {
+  .neu-btn:active {
     box-shadow:
       inset 4px 4px 10px var(--shadow-dark),
       inset -4px -4px 10px var(--shadow-light);
     color: var(--accent-soft);
   }
-  .neu-btn:hover { color: #7a5bb0; }
 
-  /* ───── SECTION WRAPPER ───── */
-  .section {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem;
-  }
+  /* ───── SECTION ───── */
+  .section { max-width: 480px; margin: 0 auto; padding: 2.5rem 1.5rem; }
 
   /* ───── NEU CARD ───── */
   .neu-card {
@@ -200,10 +182,10 @@
       inset -6px -6px 14px var(--shadow-light);
   }
 
-  /* ───── GOODNIGHT MODAL ───── */
+  /* ───── MODAL ───── */
   .overlay {
     position: fixed; inset: 0;
-    background: rgba(60,40,80,0.55);
+    background: rgba(20,10,40,0.7);
     backdrop-filter: blur(6px);
     display: flex; align-items: center; justify-content: center;
     z-index: 1000;
@@ -216,8 +198,7 @@
     background: var(--bg);
     border-radius: 28px;
     padding: 2.5rem 2rem;
-    max-width: 400px;
-    width: 100%;
+    max-width: 400px; width: 100%;
     text-align: center;
     box-shadow:
       16px 16px 36px var(--shadow-dark),
@@ -239,15 +220,9 @@
     font-size: 0.97rem;
     margin-bottom: 1.5rem;
   }
-  .modal-close {
-    margin-top: 0.5rem;
-  }
 
-  /* ───── COUNTDOWN / GOOD MORNING ───── */
-  .countdown-wrapper {
-    text-align: center;
-    margin-bottom: 1.5rem;
-  }
+  /* ───── COUNTDOWN ───── */
+  .countdown-wrapper { text-align: center; margin-bottom: 1.5rem; }
   .countdown-label {
     font-size: 0.85rem;
     color: var(--text-light);
@@ -255,24 +230,13 @@
     letter-spacing: 0.12em;
     margin-bottom: 1rem;
   }
-  .countdown-display {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .countdown-unit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-  }
+  .countdown-display { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .countdown-unit { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
   .countdown-num {
     width: 70px; height: 70px;
     display: flex; align-items: center; justify-content: center;
     font-family: 'Playfair Display', serif;
-    font-size: 1.9rem;
-    font-weight: 700;
+    font-size: 1.9rem; font-weight: 700;
     color: var(--accent);
     border-radius: 18px;
     background: var(--bg);
@@ -280,545 +244,211 @@
       8px 8px 18px var(--shadow-dark),
       -8px -8px 18px var(--shadow-light);
   }
-  .countdown-tag {
-    font-size: 0.72rem;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
+  .countdown-tag { font-size: 0.72rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.08em; }
 
-  /* Morning unlocked */
-  .morning-box {
-    display: none;
-    text-align: center;
-    animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
-  }
-  @keyframes popIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .morning-box .sun {
-    font-size: 3.5rem;
-    display: block;
-    margin-bottom: 1rem;
-    animation: spinSun 8s linear infinite;
-  }
-  @keyframes spinSun { to { transform: rotate(360deg); } }
-  .morning-box h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.7rem;
-    color: var(--text-main);
-    margin-bottom: 0.8rem;
-  }
-  .morning-box p {
-    color: var(--text-soft);
-    line-height: 1.75;
-    font-size: 0.97rem;
-  }
+  /* ───── MORNING BOX ───── */
+  .morning-box { display: none; text-align: center; animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both; }
+  @keyframes popIn { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
+  .morning-box .sun { font-size: 3.5rem; display: block; margin-bottom: 1rem; animation: spinSun 8s linear infinite; }
+  @keyframes spinSun { to{transform:rotate(360deg)} }
+  .morning-box h2 { font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--text-main); margin-bottom:0.8rem; }
+  .morning-box p { color:var(--text-soft); line-height:1.75; font-size:0.97rem; }
 
-  /* ───── TRAVEL SECTION ───── */
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--text-main);
-    margin-bottom: 0.4rem;
-  }
-  .section-subtitle {
-    font-size: 0.88rem;
-    color: var(--text-light);
-    margin-bottom: 2rem;
-    font-style: italic;
-  }
+  /* ───── TRAVEL ───── */
+  .section-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-main); margin-bottom:0.4rem; }
+  .section-subtitle { font-size:0.88rem; color:var(--text-light); margin-bottom:2rem; font-style:italic; }
 
-  /* Cloud / road animation */
   .sky-scene {
-    border-radius: 20px;
-    overflow: hidden;
-    height: 140px;
-    position: relative;
-    background: linear-gradient(180deg, #d4c4f0 0%, #e8e0f0 100%);
-    box-shadow:
-      inset 6px 6px 14px var(--shadow-dark),
-      inset -6px -6px 14px var(--shadow-light);
+    border-radius: 20px; overflow: hidden; height: 140px; position: relative;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bot) 100%);
+    box-shadow: inset 6px 6px 14px var(--shadow-dark), inset -6px -6px 14px var(--shadow-light);
     margin-bottom: 1.5rem;
   }
   .cloud {
-    position: absolute;
-    border-radius: 50px;
-    background: rgba(255,255,255,0.7);
-    box-shadow: 0 4px 12px rgba(155,126,200,0.15);
+    position: absolute; border-radius: 50px;
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 4px 12px rgba(155,126,200,0.1);
   }
-  .c1 { width:80px;height:30px; top:20px; animation: drift 12s linear infinite; left:-80px; }
-  .c2 { width:55px;height:22px; top:45px; animation: drift 17s linear infinite 4s; left:-55px; }
-  .c3 { width:65px;height:25px; top:15px; animation: drift 14s linear infinite 8s; left:-65px; }
-  @keyframes drift { from{left:-100px} to{left:110%} }
-  .road {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 36px;
-    background: #7a6b8a;
-    border-top: 3px solid rgba(155,126,200,0.4);
-  }
-  .road-line {
-    position: absolute;
-    top: 50%; transform: translateY(-50%);
-    height: 4px; width: 40px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 2px;
-    animation: roadMove 1.5s linear infinite;
-  }
-  .road-line:nth-child(1) { left: 10%; animation-delay: 0s; }
-  .road-line:nth-child(2) { left: 35%; animation-delay: -0.5s; }
-  .road-line:nth-child(3) { left: 60%; animation-delay: -1s; }
-  .road-line:nth-child(4) { left: 85%; animation-delay: -1.4s; }
-  @keyframes roadMove {
-    from { transform: translateY(-50%) translateX(0); opacity: 1; }
-    to { transform: translateY(-50%) translateX(-60px); opacity: 0.3; }
-  }
-  .car {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.6rem;
-    animation: carBounce 0.5s ease-in-out infinite alternate;
-  }
-  @keyframes carBounce { from{transform:translateX(-50%) translateY(0)} to{transform:translateX(-50%) translateY(-3px)} }
+  [data-theme="light"] .cloud { background: rgba(255,255,255,0.75); }
+  .c1{width:80px;height:30px;top:20px;animation:drift 12s linear infinite;left:-80px;}
+  .c2{width:55px;height:22px;top:45px;animation:drift 17s linear infinite 4s;left:-55px;}
+  .c3{width:65px;height:25px;top:15px;animation:drift 14s linear infinite 8s;left:-65px;}
+  @keyframes drift{from{left:-100px}to{left:110%}}
+  .road { position:absolute; bottom:0;left:0;right:0; height:36px; background:#3a2a50; border-top:3px solid rgba(155,126,200,0.3); }
+  [data-theme="light"] .road { background:#7a6b8a; }
+  .road-line { position:absolute; top:50%;transform:translateY(-50%); height:4px;width:40px; background:rgba(255,255,255,0.4); border-radius:2px; animation:roadMove 1.5s linear infinite; }
+  .road-line:nth-child(1){left:10%;animation-delay:0s}
+  .road-line:nth-child(2){left:35%;animation-delay:-0.5s}
+  .road-line:nth-child(3){left:60%;animation-delay:-1s}
+  .road-line:nth-child(4){left:85%;animation-delay:-1.4s}
+  @keyframes roadMove{from{transform:translateY(-50%) translateX(0);opacity:1}to{transform:translateY(-50%) translateX(-60px);opacity:0.2}}
+  .car { position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:1.6rem;animation:carBounce 0.5s ease-in-out infinite alternate; }
+  @keyframes carBounce{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-3px)}}
 
-  /* Miss cards */
-  .miss-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
+  /* ───── MISS CARDS ───── */
+  .miss-cards { display:flex; flex-direction:column; gap:1rem; margin-bottom:1.5rem; }
   .miss-card {
-    background: var(--bg);
-    border-radius: 18px;
-    padding: 1.1rem 1.4rem;
-    box-shadow:
-      7px 7px 16px var(--shadow-dark),
-      -7px -7px 16px var(--shadow-light);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.5s, transform 0.5s;
+    background:var(--bg); border-radius:18px; padding:1.1rem 1.4rem;
+    box-shadow: 7px 7px 16px var(--shadow-dark), -7px -7px 16px var(--shadow-light);
+    display:flex; align-items:center; gap:1rem;
+    opacity:0; transform:translateX(-20px);
+    transition: opacity 0.5s, transform 0.5s, background-color 0.4s, box-shadow 0.4s;
   }
-  .miss-card.visible { opacity: 1; transform: translateX(0); }
+  .miss-card.visible { opacity:1; transform:translateX(0); }
   .miss-card .mc-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--bg);
-    box-shadow:
-      4px 4px 10px var(--shadow-dark),
-      -4px -4px 10px var(--shadow-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
-    flex-shrink: 0;
+    width:44px;height:44px;border-radius:12px;background:var(--bg);
+    box-shadow:4px 4px 10px var(--shadow-dark),-4px -4px 10px var(--shadow-light);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
   }
-  .miss-card .mc-text {
-    font-weight: 600;
-    color: var(--text-main);
-    font-size: 0.95rem;
-  }
+  .miss-card .mc-text { font-weight:600;color:var(--text-main);font-size:0.95rem; }
 
-  /* Promise */
-  .promise-box {
-    text-align: center;
-    padding: 2rem 1.5rem;
-  }
-  .promise-box .quote-mark {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    color: var(--accent-glow);
-    line-height: 0.5;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  .promise-box p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--text-soft);
-    line-height: 1.7;
-  }
+  /* ───── PROMISE ───── */
+  .promise-box { text-align:center; padding:2rem 1.5rem; }
+  .promise-box .quote-mark { font-family:'Playfair Display',serif; font-size:4rem; color:var(--accent-glow); line-height:0.5; display:block; margin-bottom:0.5rem; }
+  .promise-box p { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:var(--text-soft); line-height:1.7; }
 
-  /* Semester countdown */
-  .sem-countdown {
-    text-align: center;
-    padding: 1.5rem;
-  }
-  .sem-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 0.3rem;
-  }
-  .sem-label {
-    font-size: 0.88rem;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-  .sem-sub {
-    font-size: 0.82rem;
-    color: var(--text-light);
-    margin-top: 0.3rem;
-    font-style: italic;
-  }
+  /* ───── FINAL LETTER ───── */
+  .final-letter { border-left:3px solid var(--accent-soft); padding-left:1.2rem; margin-top:0.5rem; }
+  .final-letter p { color:var(--text-soft); line-height:1.8; font-size:0.95rem; margin-bottom:0.8rem; }
+  .final-letter .signature { font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--accent); margin-top:1rem; }
 
-  /* Final letter */
-  .final-letter {
-    border-left: 3px solid var(--accent-soft);
-    padding-left: 1.2rem;
-    margin-top: 0.5rem;
-  }
-  .final-letter p {
-    color: var(--text-soft);
-    line-height: 1.8;
-    font-size: 0.95rem;
-    margin-bottom: 0.8rem;
-  }
-  .final-letter .signature {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--accent);
-    margin-top: 1rem;
-  }
-
-  /* Heart animation at bottom */
-  .hearts-footer {
-    text-align: center;
-    padding: 2rem 0 3rem;
-    color: var(--text-light);
-    font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .floating-hearts span {
-    display: inline-block;
-    font-size: 1.2rem;
-    margin: 0 0.2rem;
-    animation: heartFloat 2s ease-in-out infinite;
-  }
-  .floating-hearts span:nth-child(2) { animation-delay: 0.3s; }
-  .floating-hearts span:nth-child(3) { animation-delay: 0.6s; }
-  @keyframes heartFloat {
-    0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
-  }
-
-  /* Divider */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0.5rem 0 2rem;
-    color: var(--text-light);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--shadow-dark), transparent);
-  }
-
-  /* Scroll reveal */
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.shown { opacity: 1; transform: translateY(0); }
-
-  /* Nav dots */
-  .section-tag {
-    display: inline-block;
-    padding: 0.3rem 0.9rem;
-    border-radius: 50px;
-    background: var(--bg);
-    box-shadow:
-      4px 4px 10px var(--shadow-dark),
-      -4px -4px 10px var(--shadow-light);
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-
-  /* ───── WHO KNOWS CARD ───── */
-  .who-knows-card {
-    background: var(--bg);
-    border-radius: 28px;
-    padding: 2.2rem 1.8rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
+  /* ───── WHO KNOWS ───── */
+  .who-knows-card { background:var(--bg); border-radius:28px; padding:2.2rem 1.8rem; text-align:center; position:relative; overflow:hidden; }
   .who-knows-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    background: radial-gradient(ellipse at 50% 0%, rgba(180,159,216,0.18), transparent 70%);
-    pointer-events: none;
+    content:''; position:absolute; inset:0; border-radius:28px;
+    background:radial-gradient(ellipse at 50% 0%, rgba(180,159,216,0.12), transparent 70%);
+    pointer-events:none;
   }
-  .wk-stars {
-    font-size: 1.1rem;
-    letter-spacing: 0.5rem;
-    margin-bottom: 0.8rem;
-    animation: wkStarPulse 3s ease-in-out infinite;
-  }
-  @keyframes wkStarPulse { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)} }
-  .wk-eyebrow {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-light);
-    margin-bottom: 0.6rem;
-    font-style: italic;
-  }
-  .wk-heading {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: var(--text-main);
-    margin-bottom: 1.2rem;
-    line-height: 1.3;
-  }
-  .wk-body {
-    color: var(--text-soft);
-    line-height: 1.85;
-    font-size: 0.95rem;
-    margin-bottom: 0.9rem;
-    text-align: left;
-  }
-  .wk-divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-soft), transparent);
-    margin: 1.2rem auto;
-    border-radius: 2px;
-  }
-  .wk-closing {
-    color: var(--text-soft);
-    line-height: 1.85;
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-    text-align: left;
-  }
+  .wk-stars { font-size:1.1rem; letter-spacing:0.5rem; margin-bottom:0.8rem; animation:wkStarPulse 3s ease-in-out infinite; }
+  @keyframes wkStarPulse{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+  .wk-eyebrow { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--text-light); margin-bottom:0.6rem; font-style:italic; }
+  .wk-heading { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-main); margin-bottom:1.2rem; line-height:1.3; }
+  .wk-body { color:var(--text-soft); line-height:1.85; font-size:0.95rem; margin-bottom:0.9rem; text-align:left; }
+  .wk-divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,var(--accent-soft),transparent); margin:1.2rem auto; border-radius:2px; }
+  .wk-closing { color:var(--text-soft); line-height:1.85; font-size:0.95rem; margin-bottom:1rem; text-align:left; }
   .wk-question {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
-    color: var(--accent);
-    line-height: 1.7;
-    margin-top: 0.5rem;
-    padding: 1rem 1.2rem;
-    border-radius: 16px;
-    background: var(--bg);
-    box-shadow:
-      inset 4px 4px 10px var(--shadow-dark),
-      inset -4px -4px 10px var(--shadow-light);
+    font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--accent); line-height:1.7;
+    margin-top:0.5rem; padding:1rem 1.2rem; border-radius:16px; background:var(--bg);
+    box-shadow: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
   }
 
   /* ───── SLEEPING SCENE ───── */
-  .sleep-scene {
-    width: 260px;
-    height: 200px;
-    position: relative;
-    margin: 0 auto 2rem;
-  }
-  .sleep-scene svg { width: 100%; height: 100%; }
-
-  /* Zzz floaters */
+  .sleep-scene { width:260px; height:200px; position:relative; margin:0 auto 2rem; }
+  .sleep-scene svg { width:100%; height:100%; }
   .zzz {
-    position: absolute;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    color: var(--accent-soft);
-    opacity: 0;
-    animation: floatZzz 3s ease-in-out infinite;
+    position:absolute; font-family:'Playfair Display',serif; font-weight:700;
+    color:var(--accent-soft); opacity:0; animation:floatZzz 3s ease-in-out infinite;
   }
-  .zzz-1 { font-size:1rem; bottom:62px; right:48px; animation-delay:0s; }
-  .zzz-2 { font-size:1.3rem; bottom:80px; right:28px; animation-delay:0.9s; }
-  .zzz-3 { font-size:1.6rem; bottom:100px; right:8px; animation-delay:1.8s; }
-  @keyframes floatZzz {
-    0%   { opacity:0; transform:translate(0,0) scale(0.7); }
-    30%  { opacity:1; }
-    100% { opacity:0; transform:translate(-12px,-30px) scale(1.1); }
-  }
-
-  /* Pillow glow pulse */
+  .zzz-1{font-size:1rem;bottom:62px;right:48px;animation-delay:0s}
+  .zzz-2{font-size:1.3rem;bottom:80px;right:28px;animation-delay:0.9s}
+  .zzz-3{font-size:1.6rem;bottom:100px;right:8px;animation-delay:1.8s}
+  @keyframes floatZzz{0%{opacity:0;transform:translate(0,0) scale(0.7)}30%{opacity:1}100%{opacity:0;transform:translate(-12px,-30px) scale(1.1)}}
   .pillow-glow {
-    position: absolute;
-    bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    width: 140px; height: 28px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(180,159,216,0.35), transparent 70%);
-    animation: glowPulse 3s ease-in-out infinite;
+    position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+    width:140px;height:28px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(180,159,216,0.35),transparent 70%);
+    animation:glowPulse 3s ease-in-out infinite;
   }
-  @keyframes glowPulse { 0%,100%{opacity:0.6} 50%{opacity:1} }
-
-  /* Chest breathe */
-  #girl-chest { animation: breathe 3s ease-in-out infinite; transform-origin: 130px 118px; }
-  @keyframes breathe { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.04)} }
-
-  /* Stars around girl */
+  @keyframes glowPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+  #girl-chest{animation:breathe 3s ease-in-out infinite;transform-origin:130px 118px;}
+  @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.04)}}
   .scene-star {
-    position: absolute;
-    width: 5px; height: 5px;
-    background: var(--accent-soft);
-    border-radius: 50%;
-    opacity: 0;
-    animation: twinkle var(--d, 2s) ease-in-out infinite var(--delay, 0s);
+    position:absolute; width:5px; height:5px; background:var(--accent-soft);
+    border-radius:50%; opacity:0; animation:twinkle var(--d,2s) ease-in-out infinite var(--delay,0s);
+  }
+
+  /* ───── FOOTER ───── */
+  .hearts-footer { text-align:center; padding:2rem 0 3rem; color:var(--text-light); font-size:0.85rem; display:flex; flex-direction:column; align-items:center; gap:0.8rem; }
+  .floating-hearts span { display:inline-block; font-size:1.2rem; margin:0 0.2rem; animation:heartFloat 2s ease-in-out infinite; }
+  .floating-hearts span:nth-child(2){animation-delay:0.3s}
+  .floating-hearts span:nth-child(3){animation-delay:0.6s}
+  @keyframes heartFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* ───── UTILS ───── */
+  .divider { display:flex; align-items:center; gap:1rem; margin:0.5rem 0 2rem; color:var(--text-light); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--shadow-light),transparent); }
+  .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .reveal.shown { opacity:1; transform:translateY(0); }
+  .section-tag {
+    display:inline-block; padding:0.3rem 0.9rem; border-radius:50px; background:var(--bg);
+    box-shadow:4px 4px 10px var(--shadow-dark),-4px -4px 10px var(--shadow-light);
+    font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--accent); margin-bottom:1rem; font-weight:700;
   }
 
   @media(max-width:400px) {
-    .sleep-scene { width: 220px; height: 170px; }
-  }
-
-  @media(max-width:400px) {
-    .countdown-num { width:58px;height:58px;font-size:1.5rem; }
-    .neu-card { padding:1.5rem 1.2rem; }
+    .sleep-scene{width:220px;height:170px;}
+    .countdown-num{width:58px;height:58px;font-size:1.5rem;}
+    .neu-card{padding:1.5rem 1.2rem;}
   }
 </style>
 </head>
 <body>
 
 <!-- ░░░ THEME TOGGLE ░░░ -->
-<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">🌙</button>
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
 
 <!-- ░░░ HERO ░░░ -->
 <section class="hero">
   <div class="hero-stars" id="stars"></div>
   <div class="moon"></div>
-  <h1>For <span>Stella</span>,<br/>with all the love 💜</h1>
+  <h1>For <span>you</span>,<br/>💜</h1>
   <p>Open this before you sleep, when you wake up, and whenever you need a little reminder that you're cherished.</p>
-  <!-- Sleeping girl scene -->
-  <div class="sleep-scene">
-    <!-- Subtle glow under pillow -->
-    <div class="pillow-glow"></div>
 
-    <!-- Scattered tiny stars -->
+  <div class="sleep-scene">
+    <div class="pillow-glow"></div>
     <div class="scene-star" style="top:10%;left:8%;--d:2.2s;--delay:0s;"></div>
     <div class="scene-star" style="top:20%;left:80%;--d:3s;--delay:0.5s;"></div>
     <div class="scene-star" style="top:5%;left:50%;--d:2.5s;--delay:1s;"></div>
     <div class="scene-star" style="top:35%;left:5%;--d:1.8s;--delay:0.3s;"></div>
-
-    <!-- Zzz -->
     <div class="zzz zzz-1">z</div>
     <div class="zzz zzz-2">z</div>
     <div class="zzz zzz-3">Z</div>
-
     <svg viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Bed / mattress -->
-      <rect x="20" y="140" width="220" height="38" rx="12"
-            fill="#d4c4f0" stroke="#c5b8d8" stroke-width="1.5"/>
-      <!-- Mattress highlight -->
+      <rect x="20" y="140" width="220" height="38" rx="12" fill="#d4c4f0" stroke="#c5b8d8" stroke-width="1.5"/>
       <rect x="30" y="143" width="200" height="10" rx="6" fill="#e4d8f8" opacity="0.6"/>
-
-      <!-- Pillow -->
-      <ellipse cx="80" cy="138" rx="50" ry="16"
-               fill="#ede6f5" stroke="#c5b8d8" stroke-width="1.5"/>
-      <!-- Pillow highlight -->
+      <ellipse cx="80" cy="138" rx="50" ry="16" fill="#ede6f5" stroke="#c5b8d8" stroke-width="1.5"/>
       <ellipse cx="72" cy="133" rx="22" ry="6" fill="white" opacity="0.4"/>
-
-      <!-- Blanket over body -->
-      <path d="M60 148 Q130 132 220 148 L220 178 Q130 170 60 178 Z"
-            fill="#b49fd8" stroke="#9b7ec8" stroke-width="1"/>
-      <!-- Blanket fold highlight -->
+      <path d="M60 148 Q130 132 220 148 L220 178 Q130 170 60 178 Z" fill="#b49fd8" stroke="#9b7ec8" stroke-width="1"/>
       <path d="M65 150 Q130 136 215 150" stroke="#d4c4f0" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-      <!-- Blanket pattern dots -->
       <circle cx="100" cy="160" r="2.5" fill="#c8b0e8" opacity="0.5"/>
       <circle cx="130" cy="155" r="2" fill="#c8b0e8" opacity="0.5"/>
       <circle cx="160" cy="163" r="2.5" fill="#c8b0e8" opacity="0.5"/>
       <circle cx="190" cy="156" r="2" fill="#c8b0e8" opacity="0.5"/>
-
-      <!-- Arms resting on blanket -->
       <path d="M62 148 Q74 143 88 146" stroke="#e8c8a8" stroke-width="7" stroke-linecap="round"/>
-
-      <!-- Breathing chest layer -->
-      <g id="girl-chest">
-        <ellipse cx="130" cy="150" rx="30" ry="10" fill="#b49fd8" opacity="0.3"/>
-      </g>
-
-      <!-- Neck -->
+      <g id="girl-chest"><ellipse cx="130" cy="150" rx="30" ry="10" fill="#b49fd8" opacity="0.3"/></g>
       <rect x="73" y="112" width="16" height="16" rx="6" fill="#e8c8a8"/>
-
-      <!-- Head -->
       <ellipse cx="81" cy="104" rx="28" ry="26" fill="#f0d8b8"/>
-      <!-- Head shadow -->
       <ellipse cx="81" cy="108" rx="26" ry="18" fill="#e8c8a8" opacity="0.3"/>
-
-      <!-- Hair — long wavy -->
-      <path d="M54 90 Q44 80 50 65 Q55 50 70 48 Q81 45 92 48 Q107 50 112 65 Q118 82 108 94"
-            fill="#5c3d2e" stroke="none"/>
-      <!-- Hair back flow onto pillow -->
-      <path d="M54 90 Q40 105 42 125 Q44 140 56 142"
-            stroke="#5c3d2e" stroke-width="8" stroke-linecap="round" fill="none"/>
-      <path d="M108 94 Q118 108 114 126 Q112 138 105 140"
-            stroke="#5c3d2e" stroke-width="6" stroke-linecap="round" fill="none"/>
-      <!-- Hair highlights -->
+      <path d="M54 90 Q44 80 50 65 Q55 50 70 48 Q81 45 92 48 Q107 50 112 65 Q118 82 108 94" fill="#5c3d2e"/>
+      <path d="M54 90 Q40 105 42 125 Q44 140 56 142" stroke="#5c3d2e" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M108 94 Q118 108 114 126 Q112 138 105 140" stroke="#5c3d2e" stroke-width="6" stroke-linecap="round" fill="none"/>
       <path d="M62 54 Q72 48 82 50" stroke="#8b6040" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
       <path d="M58 70 Q52 80 54 90" stroke="#8b6040" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
-
-      <!-- Closed eyes (sleeping) -->
-      <!-- Left eye -->
       <path d="M68 96 Q73 100 78 96" stroke="#5c3d2e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-      <!-- Lashes left -->
       <line x1="69" y1="96" x2="67" y2="93" stroke="#5c3d2e" stroke-width="1.2" stroke-linecap="round"/>
       <line x1="77" y1="96" x2="78" y2="93" stroke="#5c3d2e" stroke-width="1.2" stroke-linecap="round"/>
-      <!-- Right eye -->
       <path d="M84 96 Q89 100 94 96" stroke="#5c3d2e" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-      <!-- Lashes right -->
       <line x1="85" y1="96" x2="83" y2="93" stroke="#5c3d2e" stroke-width="1.2" stroke-linecap="round"/>
       <line x1="93" y1="96" x2="94" y2="93" stroke="#5c3d2e" stroke-width="1.2" stroke-linecap="round"/>
-
-      <!-- Nose (tiny) -->
       <path d="M80 104 Q81 107 82 104" stroke="#c8a888" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-
-      <!-- Smile / peaceful lips -->
       <path d="M75 110 Q81 115 87 110" stroke="#d4808a" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-      <!-- Blush cheeks -->
       <ellipse cx="66" cy="106" rx="7" ry="4" fill="#f0a0b0" opacity="0.35"/>
       <ellipse cx="96" cy="106" rx="7" ry="4" fill="#f0a0b0" opacity="0.35"/>
-
-      <!-- Tiny heart above head -->
-      <path d="M81 74 C81 72 79 70 77 72 C75 70 73 72 73 74 C73 77 78 81 81 83 C84 81 89 77 89 74 C89 72 87 70 85 72 C83 70 81 72 81 74 Z"
-            fill="#e8a0c8" opacity="0.8">
+      <path d="M81 74 C81 72 79 70 77 72 C75 70 73 72 73 74 C73 77 78 81 81 83 C84 81 89 77 89 74 C89 72 87 70 85 72 C83 70 81 72 81 74 Z" fill="#e8a0c8" opacity="0.8">
         <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/>
-        <animateTransform attributeName="transform" type="scale" values="1;1.15;1"
-          dur="2.5s" repeatCount="indefinite" additive="sum"
-          transformOrigin="81 77"/>
+        <animateTransform attributeName="transform" type="scale" values="1;1.15;1" dur="2.5s" repeatCount="indefinite" additive="sum" transformOrigin="81 77"/>
       </path>
-
-      <!-- Moon decoration top right -->
       <path d="M220 30 Q230 40 220 50 Q210 40 220 30 Z" fill="#d4c4f0" opacity="0.7"/>
       <circle cx="226" cy="40" r="8" fill="#e8e0f0" opacity="0.9"/>
-
-      <!-- Small stars decoration -->
-      <circle cx="200" cy="25" r="2.5" fill="#b49fd8" opacity="0.8">
-        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="240" cy="55" r="1.8" fill="#b49fd8" opacity="0.7">
-        <animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="210" cy="60" r="1.5" fill="#b49fd8" opacity="0.6">
-        <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
-      </circle>
+      <circle cx="200" cy="25" r="2.5" fill="#b49fd8" opacity="0.8"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="240" cy="55" r="1.8" fill="#b49fd8" opacity="0.7"><animate attributeName="opacity" values="0.2;0.9;0.2" dur="2.8s" repeatCount="indefinite"/></circle>
+      <circle cx="210" cy="60" r="1.5" fill="#b49fd8" opacity="0.6"><animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/></circle>
     </svg>
   </div>
 
   <button class="neu-btn" onclick="openModal('goodnight-modal')">🌙 Read your goodnight message</button>
 </section>
+
 
 <!-- ░░░ GOODNIGHT MODAL ░░░ -->
 <div class="overlay" id="goodnight-modal">
@@ -826,7 +456,7 @@
     <span class="modal-emoji">🌙✨</span>
     <h2>Goodnight, Stella</h2>
     <p>
-      Before you close your eyes tonight, I want you to know — you are so wonderfully you. This semester wouldn't have been the same without your laughter, your warm energy, and the way you make everything a little brighter.<br/><br/>
+      Before you close your eyes tonight,before ulale...nataka ujue kuwa you are so wonderful.<br/><br/>
       Sleep well, dream sweetly, and let tomorrow be kind to you. You deserve every peaceful moment. 💜
     </p>
     <button class="neu-btn modal-close" onclick="closeModal('goodnight-modal')">Close 🌸</button>
@@ -863,9 +493,10 @@
       <span class="sun">☀️</span>
       <h2>Good morning, Stella! 🌸</h2>
       <p>
-        Rise and shine, bestie! Today is a brand new day, and it's already better just because you're in it. ☀️<br/><br/>
-        I hope you woke up to warmth, peace, and a heart full of joy. Wherever today takes you, carry your beautiful spirit with you — it lights up every room you walk into. 💜<br/><br/>
-        Have the most wonderful day. You deserve it, always.
+        Heyy...Today is a brand new day, and it's already better just because you're in it. ☀️<br/><br/>
+        I hope you woke up to warmth, umeamka salama na furaha🤭<br/><br/>
+        Have the most wonderful day. You deserve it, always💜.
+        Kuwa na siku njema😊.
       </p>
     </div>
 
@@ -884,7 +515,7 @@
 <!-- ░░░ TRAVEL SECTION ░░░ -->
 <section class="section reveal" id="travel-section">
   <span class="section-tag">✈️ Safe Journey</span>
-  <h2 class="section-title">Safe Journey Home, bestie 😊🤭</h2>
+  <h2 class="section-title">Safe Journey Home,😊🤭</h2>
   <p class="section-subtitle">Every goodbye is just a "see you later."</p>
 
   <!-- Sky / road animation -->
@@ -905,7 +536,9 @@
   <div class="neu-card reveal">
     <div class="section-tag" style="margin-bottom:0.8rem;">Section 1 — Safe Journey</div>
     <p style="color:var(--text-soft);line-height:1.8;font-size:0.96rem;">
-      I hope you have a safe and peaceful journey home. May every mile bring you closer to your family, and may you arrive with a smile on your face. Take care of yourself and enjoy the holiday — you deserve the rest. 💜
+      I hope you have a safe and peaceful journey home. 
+      Salimia wazazi 😁😂. May you arrive with a smile on your face. Take care of yourself and enjoy the holiday — you deserve the rest. 💜
+      <em>Nitakumiss😫😫</em>
     </p>
   </div>
 
@@ -947,18 +580,16 @@
     <div class="final-letter">
       <p><strong>Stella,</strong></p>
       <p>
-        It's strange knowing campus won't be the same without you around. I'll miss our random conversations, the laughs, and even our little movie debates. 😂
+        Thank you for making this semester brighter. Kuongea ukweli you are the best. Nakutakia safari njema and I hope you will enjoy every moment with your family, Sem imekuwa kubwa but sasa hiyo tumemaliza. Take good care of yourself.
       </p>
       <p>
-        Thank you for making this semester brighter. I hope you have a safe journey home, enjoy every moment with your family, and take good care of yourself.
-      </p>
-      <p>
-        I'll be looking forward to the day we're back on campus making more memories together.
-      </p>
-      <p>
-        Travel safely, and remember — you've got a friend who's already looking forward to seeing you again. 💜🌸
+        Travel safely, and remember — you've got me🤭😂 I am looking forward to seeing you again in one piece...unaelewa😂 💜🌸
       </p>
       <p class="signature">— Your bestie, always 🌸</p>
+
+      <p>
+        Please stay safe for me...sawa😊🤭.
+      </p>
     </div>
   </div>
 
@@ -967,23 +598,8 @@
     <div class="wk-stars">
       <span>✨</span><span>🌙</span><span>✨</span>
     </div>
-    <p class="wk-eyebrow">a little something to sit with…</p>
-    <h3 class="wk-heading">Who knows where this goes? 🌸</h3>
-    <p class="wk-body">
-      You know, friendships like ours don't really have a script. We started with conversations, grew through laughter, and somewhere along the way you became someone I genuinely treasure — more than I probably say out loud.
-    </p>
-    <p class="wk-body">
-      I don't know exactly what we are or what we'll be. Maybe bestfriends forever. Maybe something even more beautiful than that. Life has a funny way of writing its own endings — and I find myself quietly curious about ours. 😊
-    </p>
-    <p class="wk-body">
-      What I do know is this: wherever this friendship goes, I want to be there for every chapter of it. The inside jokes, the late-night talks, the silences that feel comfortable — I want all of it, Stella.
-    </p>
-    <div class="wk-divider"></div>
-    <p class="wk-closing">
-      So travel safe, rest well, and know that someone back here is thinking of you with a smile — and maybe, just maybe, a little more than that. 💜
-    </p>
     <p class="wk-question">
-      <em>Who knows how this story ends?<br/>I think that's the most exciting part.</em>
+      <em>Who knows how this ends?<br/>I think that's the most exciting part. Mimi nitakumiss si ati...😂</em>
     </p>
   </div>
 </section>
@@ -993,104 +609,88 @@
   <div class="floating-hearts">
     <span>💜</span><span>🌸</span><span>✨</span>
   </div>
-  <p>Made with love — and a little something more — just for you, Stella.</p>
+  <p><em>just for you😊</em></p>
 </div>
 
+
 <script>
-  // ── THEME TOGGLE ──
+  // ── THEME TOGGLE (dark is default) ──
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('theme-toggle');
+
   function toggleTheme() {
-    const html = document.documentElement;
-    const btn = document.getElementById('theme-toggle');
     const isDark = html.getAttribute('data-theme') === 'dark';
     html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    btn.textContent = isDark ? '🌙' : '☀️';
-    // re-tint stars
+    toggleBtn.textContent = isDark ? '🌙' : '☀️';
+    updateStarColors(!isDark);
+  }
+
+  function updateStarColors(isDark) {
     document.querySelectorAll('.star').forEach(s => {
-      s.style.background = isDark ? '#b49fd8' : '#c4a0f0';
+      s.style.background = isDark ? '#c4a0f0' : '#b49fd8';
     });
   }
 
   // ── STARS ──
   const starsEl = document.getElementById('stars');
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 65; i++) {
     const s = document.createElement('div');
     s.className = 'star';
-    s.style.cssText = `top:${Math.random()*80}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*5}s;width:${2+Math.random()*3}px;height:${2+Math.random()*3}px;background:#c4a0f0;`;
+    const size = 2 + Math.random() * 3;
+    s.style.cssText = `top:${Math.random()*85}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*6}s;width:${size}px;height:${size}px;background:#c4a0f0;`;
     starsEl.appendChild(s);
   }
 
   // ── MODALS ──
-  function openModal(id) {
-    document.getElementById(id).classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
   document.querySelectorAll('.overlay').forEach(o => {
-    o.addEventListener('click', e => { if (e.target === o) closeModal(o.id); });
+    o.addEventListener('click', e => { if (e.target===o) closeModal(o.id); });
   });
 
-  // ── COUNTDOWN TO 7AM TOMORROW (27 JUNE 2026) ──
+  // ── COUNTDOWN TO 7AM 27 JUNE 2026 ──
   const TARGET = new Date('2026-06-27T07:00:00');
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
+  function pad(n) { return String(n).padStart(2,'0'); }
   function updateCountdown() {
-    const now = new Date();
-    const diff = TARGET - now;
-
+    const diff = TARGET - new Date();
     if (diff <= 0) {
-      // Time reached — transform countdown to morning button
-      document.getElementById('countdown-wrapper').style.display = 'none';
-      document.getElementById('locked-msg').style.display = 'none';
-      document.getElementById('morning-btn-wrapper').style.display = 'block';
+      document.getElementById('countdown-wrapper').style.display='none';
+      document.getElementById('locked-msg').style.display='none';
+      document.getElementById('morning-btn-wrapper').style.display='block';
       return;
     }
-
-    const totalSecs = Math.floor(diff / 1000);
-    const h = Math.floor(totalSecs / 3600);
-    const m = Math.floor((totalSecs % 3600) / 60);
-    const s = totalSecs % 60;
-
-    document.getElementById('cd-h').textContent = pad(h);
-    document.getElementById('cd-m').textContent = pad(m);
-    document.getElementById('cd-s').textContent = pad(s);
-
-    // Show locked btn
-    document.getElementById('locked-msg').style.display = 'block';
+    const t = Math.floor(diff/1000);
+    document.getElementById('cd-h').textContent = pad(Math.floor(t/3600));
+    document.getElementById('cd-m').textContent = pad(Math.floor((t%3600)/60));
+    document.getElementById('cd-s').textContent = pad(t%60);
+    document.getElementById('locked-msg').style.display='block';
   }
-
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  function tryOpenMorning() { /* locked, do nothing */ }
-
   function revealMorning() {
-    document.getElementById('morning-btn-wrapper').style.display = 'none';
-    document.getElementById('morning-box').style.display = 'block';
+    document.getElementById('morning-btn-wrapper').style.display='none';
+    document.getElementById('morning-box').style.display='block';
   }
 
   // ── SCROLL REVEAL ──
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('shown'); io.unobserve(e.target); } });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('shown');io.unobserve(e.target);} });
   }, { threshold: 0.15 });
-  reveals.forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   // ── MISS CARDS STAGGER ──
   const cards = document.querySelectorAll('.miss-card');
-  const cardIO = new IntersectionObserver((entries) => {
+  const cardIO = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        cards.forEach((c, i) => setTimeout(() => c.classList.add('visible'), i * 180));
+      if(e.isIntersecting){
+        cards.forEach((c,i) => setTimeout(()=>c.classList.add('visible'), i*180));
         cardIO.disconnect();
       }
     });
   }, { threshold: 0.2 });
   const missSection = document.querySelector('.miss-cards');
-  if (missSection) cardIO.observe(missSection);
+  if(missSection) cardIO.observe(missSection);
 </script>
 </body>
 </html>
