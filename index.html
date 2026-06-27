@@ -254,83 +254,6 @@
   .morning-box h2 { font-family:'Playfair Display',serif; font-size:1.7rem; color:var(--text-main); margin-bottom:0.8rem; }
   .morning-box p { color:var(--text-soft); line-height:1.75; font-size:0.97rem; }
 
-  /* ───── TRAVEL ───── */
-  .section-title { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-main); margin-bottom:0.4rem; }
-  .section-subtitle { font-size:0.88rem; color:var(--text-light); margin-bottom:2rem; font-style:italic; }
-
-  .sky-scene {
-    border-radius: 20px; overflow: hidden; height: 140px; position: relative;
-    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bot) 100%);
-    box-shadow: inset 6px 6px 14px var(--shadow-dark), inset -6px -6px 14px var(--shadow-light);
-    margin-bottom: 1.5rem;
-  }
-  .cloud {
-    position: absolute; border-radius: 50px;
-    background: rgba(255,255,255,0.18);
-    box-shadow: 0 4px 12px rgba(155,126,200,0.1);
-  }
-  [data-theme="light"] .cloud { background: rgba(255,255,255,0.75); }
-  .c1{width:80px;height:30px;top:20px;animation:drift 12s linear infinite;left:-80px;}
-  .c2{width:55px;height:22px;top:45px;animation:drift 17s linear infinite 4s;left:-55px;}
-  .c3{width:65px;height:25px;top:15px;animation:drift 14s linear infinite 8s;left:-65px;}
-  @keyframes drift{from{left:-100px}to{left:110%}}
-  .road { position:absolute; bottom:0;left:0;right:0; height:36px; background:#3a2a50; border-top:3px solid rgba(155,126,200,0.3); }
-  [data-theme="light"] .road { background:#7a6b8a; }
-  .road-line { position:absolute; top:50%;transform:translateY(-50%); height:4px;width:40px; background:rgba(255,255,255,0.4); border-radius:2px; animation:roadMove 1.5s linear infinite; }
-  .road-line:nth-child(1){left:10%;animation-delay:0s}
-  .road-line:nth-child(2){left:35%;animation-delay:-0.5s}
-  .road-line:nth-child(3){left:60%;animation-delay:-1s}
-  .road-line:nth-child(4){left:85%;animation-delay:-1.4s}
-  @keyframes roadMove{from{transform:translateY(-50%) translateX(0);opacity:1}to{transform:translateY(-50%) translateX(-60px);opacity:0.2}}
-  .car { position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:1.6rem;animation:carBounce 0.5s ease-in-out infinite alternate; }
-  @keyframes carBounce{from{transform:translateX(-50%) translateY(0)}to{transform:translateX(-50%) translateY(-3px)}}
-
-  /* ───── MISS CARDS ───── */
-  .miss-cards { display:flex; flex-direction:column; gap:1rem; margin-bottom:1.5rem; }
-  .miss-card {
-    background:var(--bg); border-radius:18px; padding:1.1rem 1.4rem;
-    box-shadow: 7px 7px 16px var(--shadow-dark), -7px -7px 16px var(--shadow-light);
-    display:flex; align-items:center; gap:1rem;
-    opacity:0; transform:translateX(-20px);
-    transition: opacity 0.5s, transform 0.5s, background-color 0.4s, box-shadow 0.4s;
-  }
-  .miss-card.visible { opacity:1; transform:translateX(0); }
-  .miss-card .mc-icon {
-    width:44px;height:44px;border-radius:12px;background:var(--bg);
-    box-shadow:4px 4px 10px var(--shadow-dark),-4px -4px 10px var(--shadow-light);
-    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;
-  }
-  .miss-card .mc-text { font-weight:600;color:var(--text-main);font-size:0.95rem; }
-
-  /* ───── PROMISE ───── */
-  .promise-box { text-align:center; padding:2rem 1.5rem; }
-  .promise-box .quote-mark { font-family:'Playfair Display',serif; font-size:4rem; color:var(--accent-glow); line-height:0.5; display:block; margin-bottom:0.5rem; }
-  .promise-box p { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:var(--text-soft); line-height:1.7; }
-
-  /* ───── FINAL LETTER ───── */
-  .final-letter { border-left:3px solid var(--accent-soft); padding-left:1.2rem; margin-top:0.5rem; }
-  .final-letter p { color:var(--text-soft); line-height:1.8; font-size:0.95rem; margin-bottom:0.8rem; }
-  .final-letter .signature { font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--accent); margin-top:1rem; }
-
-  /* ───── WHO KNOWS ───── */
-  .who-knows-card { background:var(--bg); border-radius:28px; padding:2.2rem 1.8rem; text-align:center; position:relative; overflow:hidden; }
-  .who-knows-card::before {
-    content:''; position:absolute; inset:0; border-radius:28px;
-    background:radial-gradient(ellipse at 50% 0%, rgba(180,159,216,0.12), transparent 70%);
-    pointer-events:none;
-  }
-  .wk-stars { font-size:1.1rem; letter-spacing:0.5rem; margin-bottom:0.8rem; animation:wkStarPulse 3s ease-in-out infinite; }
-  @keyframes wkStarPulse{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
-  .wk-eyebrow { font-size:0.75rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--text-light); margin-bottom:0.6rem; font-style:italic; }
-  .wk-heading { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-main); margin-bottom:1.2rem; line-height:1.3; }
-  .wk-body { color:var(--text-soft); line-height:1.85; font-size:0.95rem; margin-bottom:0.9rem; text-align:left; }
-  .wk-divider { width:60px; height:2px; background:linear-gradient(90deg,transparent,var(--accent-soft),transparent); margin:1.2rem auto; border-radius:2px; }
-  .wk-closing { color:var(--text-soft); line-height:1.85; font-size:0.95rem; margin-bottom:1rem; text-align:left; }
-  .wk-question {
-    font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--accent); line-height:1.7;
-    margin-top:0.5rem; padding:1rem 1.2rem; border-radius:16px; background:var(--bg);
-    box-shadow: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light);
-  }
 
   /* ───── SLEEPING SCENE ───── */
   .sleep-scene { width:260px; height:200px; position:relative; margin:0 auto 2rem; }
@@ -454,7 +377,7 @@
 <div class="overlay" id="goodnight-modal">
   <div class="modal">
     <span class="modal-emoji">🌙✨</span>
-    <h2>Goodnight, Stella</h2>
+    <h2>Goodnight...</h2>
     <p>
       Before you close your eyes tonight,before ulale...nataka ujue kuwa you are so wonderful.<br/><br/>
       Sleep well, dream sweetly, and let tomorrow be kind to you. You deserve every peaceful moment. 💜
@@ -466,7 +389,7 @@
 <!-- ░░░ GOOD MORNING SECTION ░░░ -->
 <section class="section reveal" id="morning-section">
   <span class="section-tag">⏰ Good Morning</span>
-  <div class="divider">Unlocks at 7 AM tomorrow</div>
+  <div class="divider">Unlocks at 8 AM tomorrow</div>
 
   <div class="neu-card">
     <!-- Countdown -->
@@ -491,7 +414,7 @@
     <!-- Good morning reveal -->
     <div class="morning-box" id="morning-box">
       <span class="sun">☀️</span>
-      <h2>Good morning, Stella! 🌸</h2>
+      <h2>Good morning,🌸</h2>
       <p>
         Heyy...Today is a brand new day, and it's already better just because you're in it. ☀️<br/><br/>
         I hope you woke up to warmth, umeamka salama na furaha🤭<br/><br/>
@@ -503,7 +426,7 @@
     <!-- Locked message when time hasn't come yet -->
     <div id="locked-msg" style="text-align:center;margin-top:1.2rem;display:none;">
       <button class="neu-btn" onclick="tryOpenMorning()" style="opacity:0.5;cursor:not-allowed;" disabled>
-        🔒 Opens at 7:00 AM tomorrow
+        🔒 Opens at 8:00 AM 
       </button>
     </div>
     <div id="morning-btn-wrapper" style="text-align:center;margin-top:1.2rem;display:none;">
@@ -512,49 +435,7 @@
   </div>
 </section>
 
-<!-- ░░░ TRAVEL SECTION ░░░ -->
-<section class="section reveal" id="travel-section">
-  <span class="section-tag">✈️ Safe Journey</span>
-  <h2 class="section-title">Safe Journey Home,😊🤭</h2>
-  <p class="section-subtitle">Every goodbye is just a "see you later."</p>
 
-  <!-- Sky / road animation -->
-  <div class="sky-scene">
-    <div class="cloud c1"></div>
-    <div class="cloud c2"></div>
-    <div class="cloud c3"></div>
-    <div class="road">
-      <div class="road-line"></div>
-      <div class="road-line"></div>
-      <div class="road-line"></div>
-      <div class="road-line"></div>
-    </div>
-    <div class="car">🚗</div>
-  </div>
-
-  <!-- Section 1 -->
-  <div class="neu-card reveal">
-    <div class="section-tag" style="margin-bottom:0.8rem;">Section 1 — Safe Journey</div>
-    <p style="color:var(--text-soft);line-height:1.8;font-size:0.96rem;">
-      I hope you have a safe and peaceful journey home. 
-      Salimia wazazi 😁😂. May you arrive with a smile on your face. Take care of yourself and enjoy the holiday — you deserve the rest. 💜
-      <em>Nitakumiss😫😫</em>
-    </p>
-  </div>
-
-  <!-- Section 2 – Miss cards -->
-  <div class="neu-card reveal">
-    <div class="section-tag" style="margin-bottom:0.8rem;">Section 2 — What I'll Miss</div>
-    <div class="miss-cards" id="miss-cards">
-      <div class="miss-card">
-        <div class="mc-icon">💬</div>
-        <div class="mc-text">Our conversations</div>
-      </div>
-      <div class="miss-card">
-        <div class="mc-icon">😂</div>
-        <div class="mc-text">Arguing about movies</div>
-      </div>
-      <div class="miss-card">
         <div class="mc-icon">🌸</div>
         <div class="mc-text">Seeing you around campus</div>
       </div>
@@ -565,45 +446,7 @@
     </div>
   </div>
 
-  <!-- Section 3 – Promise -->
-  <div class="neu-card reveal">
-    <div class="section-tag" style="margin-bottom:0.8rem;">Section 3 — Promise</div>
-    <div class="promise-box">
-      <span class="quote-mark">"</span>
-      <p>Distance doesn't end a good friendship. It just gives us more stories to tell when we meet again.</p>
-    </div>
-  </div>
-
-  <!-- Final letter -->
-  <div class="neu-card reveal">
-    <div class="section-tag" style="margin-bottom:0.8rem;">A note from the heart 💜</div>
-    <div class="final-letter">
-      <p><strong>Stella,</strong></p>
-      <p>
-        Thank you for making this semester brighter. Kuongea ukweli you are the best. Nakutakia safari njema and I hope you will enjoy every moment with your family, Sem imekuwa kubwa but sasa hiyo tumemaliza. Take good care of yourself.
-      </p>
-      <p>
-        Travel safely, and remember — you've got me🤭😂 I am looking forward to seeing you again in one piece...unaelewa😂 💜🌸
-      </p>
-      <p class="signature">— Your bestie, always 🌸</p>
-
-      <p>
-        Please stay safe for me...sawa😊🤭.
-      </p>
-    </div>
-  </div>
-
-  <!-- Who knows card -->
-  <div class="neu-card reveal who-knows-card">
-    <div class="wk-stars">
-      <span>✨</span><span>🌙</span><span>✨</span>
-    </div>
-    <p class="wk-question">
-      Who knows how this ends?<br/>I think that's the most exciting part. Mimi nitakumiss si ati...😂
-    </p>
-  </div>
-</section>
-
+  
 <!-- Footer -->
 <div class="hearts-footer reveal">
   <div class="floating-hearts">
@@ -648,8 +491,8 @@
     o.addEventListener('click', e => { if (e.target===o) closeModal(o.id); });
   });
 
-  // ── COUNTDOWN TO 7AM 27 JUNE 2026 ──
-  const TARGET = new Date('2026-06-27T07:00:00');
+  // ── COUNTDOWN TO 7AM 28 JUNE 2026 ──
+  const TARGET = new Date('2026-06-28T08:00:00');
   function pad(n) { return String(n).padStart(2,'0'); }
   function updateCountdown() {
     const diff = TARGET - new Date();
